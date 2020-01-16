@@ -17,10 +17,10 @@
     <div class="sider">
         <a href="#" class="logo"><img src="images/logo02.png" alt="logo"></a>
         <div class="user_info">
-            <img src="images/2.jpg" alt="person">
-            <span>欢迎&nbsp;&nbsp;李思思</span>
+            <img src="images/2.jpg" alt="person" id="userhd">
+            <span id="userid">欢迎&nbsp;&nbsp;</span>
             <b>管理员</b>
-        </div>
+        </div>o
         <div class="menu">
             <div class="level01 active"><a href="main_count.html" target="main_frame"><i
                         class="iconfont icon-yidiandiantubiao04"></i><span>首页</span></a></div>
@@ -123,6 +123,15 @@
                 }
             })
 
+        })
+
+
+        // 获取管理员信息
+        $.get('http://192.168.172.82:8000/admin/getuser').then(function (res) {
+            // 这里的意思 把请求返回的数据 管理员的名字 和头像 放在上面
+            // $('#userid') 放管理员名字的标签   $('#userid').text 标签的文本
+            $('#userid').text(res.data.nickname)
+            $('userhd').prop('src', res.data.user_pic)
         })
 
     </script>
