@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/iconfont.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="../js库/jquery-1.12.4.min.js"></script>
 </head>
 
 <body>
@@ -23,11 +24,48 @@
             <form class="login_form">
                 <i class="iconfont icon-user"></i>
                 <i class="iconfont icon-key"></i>
-                <input type="text" class="input_txt" placeholder="邮箱/手机号">
-                <input type="password" class="input_pass" placeholder="密码">
-                <input type="submit" class="input_sub" value="登 录">
+                <input type="text" class="input_txt" placeholder="用户名" id="username">
+                <input type="password" class="input_pass" placeholder="密码" id="password">
+                <!-- 如果submit的按钮在表单中 他会有一个提交的动作 如果吧submit改成button 那么就不会提交表单-->
+                <input id="btn_in" type="button" class="input_sub" value="登 录">
             </form>
         </div>
-    </div> 
+    </div>
 </body>
+<script>
+    // 第一步 添加点击事件   首先要收集用户信息 判断一下
+    // 请求ajax接口 根据接口反馈做后续
+    // window.location.href 跳转
+
+    $('#btn_in').on('click', function () {
+        var name = $('#username').val().trim()
+        var password = $('#password').val().trim()
+        if (name.length === 0 || password.length === 0) {
+            alert('输入不能为空')
+            return
+        }
+
+        // 调接口 提交账号密码用户信息是接口文档里方式是post  用老师教的新方式写
+
+        // $.post(url地址，数据)then()
+        // 登录
+        $.post(' http://192.168.172.82:8000/admin/login', {
+            user_name: name,
+            password: password
+
+        }).then(function (res) {
+            if (res.code == 200) {
+                alert('登录成功')
+                // 跳转到主页
+                window.location.href = "./index.html"
+            }
+            else {
+                alert('登录失败')
+            }
+        })
+    })
+
+
+</script>
+
 </html>
