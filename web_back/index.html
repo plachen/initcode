@@ -110,29 +110,18 @@
         }
 
     </script>
-
+    <script src="./js/myjs/API.js"></script>
+    <script src="./js/myjs/mk.js"></script>
     <script>
+
         // 后台管理页面退出跳转
 
-        $('#out').on('click', function () {
-            // ajax 要有退出请求
-            $.post('http://192.168.172.82:8000/admin/logout').then(function (res) {
-                if (res.code == 200) {
-                    alert('退出成功')
-                    window.location.href = "./login.html"
-                }
-            })
-
-        })
+        user.getout()
+        user.getuser()
 
 
         // 获取管理员信息
-        $.get('http://192.168.172.82:8000/admin/getuser').then(function (res) {
-            // 这里的意思 把请求返回的数据 管理员的名字 和头像 放在上面
-            // $('#userid') 放管理员名字的标签   $('#userid').text 标签的文本
-            $('#userid').text(res.data.nickname)
-            $('userhd').prop('src', res.data.user_pic)
-        })
+
 
     </script>
 </body>
